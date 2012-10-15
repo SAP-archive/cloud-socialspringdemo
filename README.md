@@ -1,4 +1,4 @@
-socialspringdemo
+sample-twitter
 ================
 
-socialspringdemo
+A simple demo app showcasing how-to use springsocial with twitter

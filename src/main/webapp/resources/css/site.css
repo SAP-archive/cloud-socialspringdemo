@@ -1,0 +1,15 @@
+#hero-img {
+float: right;
+width: 440px;
+height: 206.25px;
+margin-right: 10px;
+margin-top: 20px;
+font-size: 275px;
+text-align: center;
+text-shadow: 2px 2px 3px #222;
+color: white !important;
+}
+
+.hero-unit .hero-content {
+width: 500px;
+}

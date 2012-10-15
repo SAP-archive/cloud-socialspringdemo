@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
+    
+    <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/DefaultDB" />
+
+	<!-- initialize DB required to store user auth tokens -->
+	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+	  <jdbc:script location="classpath:/JdbcUsersConnectionRepository.sql"/>
+	</jdbc:initialize-database>
+
+	<bean id="connectionFactoryLocator"
+		class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+		<property name="connectionFactories">
+			<list>
+				<ref bean="twitterConnectFactory" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="locations" value="classpath:oauth.properties"/>
+	</bean>
+
+	<bean id="twitterConnectFactory" class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
+		<constructor-arg index="0" value="${oauth.consumerKey}"/>
+		<constructor-arg index="1" value="${oauth.consumerSecret}"/>
+	</bean>
+
+	<bean id="usersConnectionRepository"
+		class="com.sap.netweaver.cloud.demo.social.connect.jdbc.CustomJdbcUsersConnectionRepository">
+		<constructor-arg ref="dataSource" />
+		<constructor-arg ref="connectionFactoryLocator" />
+		<constructor-arg ref="textEncryptor" />
+	</bean>
+	
+	<bean id="connectionRepository" factory-method="createConnectionRepository"
+		factory-bean="usersConnectionRepository" scope="request">
+		<constructor-arg value="#{request.userPrincipal.name}" />
+		<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+	
+<!-- 
+	<bean id="twitter" factory-method="ﬁndPrimaryConnection"
+		factory-bean="connectionRepository" scope="request" depends-on="connectionRepository">
+		<constructor-arg value="org.springframework.social.twitter.api.impl.TwitterTemplate" />
+		<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+-->	
+
+	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
+		factory-method="noOpText" />
+	
+	<bean id="connectController" class="org.springframework.social.connect.web.ConnectController">
+		<constructor-arg ref="connectionFactoryLocator"/>
+		<constructor-arg ref="connectionRepository"/>
+		<property name="applicationUrl" value="https://twitterdemo.netweaver.ondemand.com" />
+	</bean>
+	
+	<bean id="signInAdapter" class="com.sap.netweaver.cloud.demo.social.SimpleSignInAdapter" />
+	
+</beans>

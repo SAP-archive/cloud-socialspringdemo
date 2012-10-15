@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="default.definition" template="/WEB-INF/layouts/default.jsp">
+		<put-attribute name="meta" value="/WEB-INF/views/tiles/meta.jsp" />
+		<put-attribute name="js" value="/WEB-INF/views/tiles/js.jsp" />
+		<put-attribute name="stylesheets" value="/WEB-INF/views/tiles/stylesheets.jsp" />
+		<put-attribute name="navbar" value="/WEB-INF/views/tiles/navbar.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/tiles/menu.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="activeMenu" value="" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/tiles/sidebar.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+	</definition>
+	
+	<definition name="home.definition" template="/WEB-INF/layouts/home.jsp">
+		<put-attribute name="meta" value="/WEB-INF/views/tiles/meta.jsp" />
+		<put-attribute name="js" value="/WEB-INF/views/tiles/js.jsp" />
+		<put-attribute name="stylesheets" value="/WEB-INF/views/tiles/stylesheets.jsp" />
+		<put-attribute name="navbar" value="/WEB-INF/views/tiles/navbar.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/tiles/menu.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="home.definition">
+		<put-attribute name="title" value="Spring Social Demo" />
+		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+	</definition>
+	
+	<definition name="connect/twitterConnect" extends="default.definition">
+		<put-attribute name="title" value="Connect" />
+		<put-attribute name="content" value="/WEB-INF/views/twitterConnect.jsp" />
+		<put-attribute name="activeMenu" value="menuConnect" />
+	</definition>
+
+	<definition name="connect/twitterConnected" extends="default.definition">
+		<put-attribute name="title" value="Connected" />
+		<put-attribute name="content" value="/WEB-INF/views/twitterConnected.jsp" />
+		<put-attribute name="activeMenu" value="menuConnect" />
+	</definition>
+	
+	<definition name="twitter/profile" extends="default.definition">
+		<put-attribute name="title" value="Twitter Profile" />
+		<put-attribute name="content" value="/WEB-INF/views/profile.jsp" />
+		<put-attribute name="activeMenu" value="menuProfile" />
+	</definition>
+	
+	<definition name="twitter/timeline" extends="default.definition">
+		<put-attribute name="title" value="Timeline" />
+		<put-attribute name="content" value="/WEB-INF/views/timeline.jsp" />
+		<put-attribute name="activeMenu" value="menuTimeline" />
+	</definition>
+
+	<definition name="twitter/initTweet" extends="default.definition">
+		<put-attribute name="title" value="Tweet" />
+		<put-attribute name="content" value="/WEB-INF/views/tweet.jsp" />
+		<put-attribute name="activeMenu" value="menuTweet" />
+	</definition>
+	
+</tiles-definitions>

@@ -42,7 +42,7 @@
 	</bean>
 
 	<bean id="usersConnectionRepository"
-		class="com.sap.netweaver.cloud.demo.social.connect.jdbc.CustomJdbcUsersConnectionRepository">
+		class="com.sap.netweaver.cloud.samples.springsocialdemo.connect.jdbc.CustomJdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
@@ -71,6 +71,6 @@
 		<property name="applicationUrl" value="https://twitterdemo.netweaver.ondemand.com" />
 	</bean>
 	
-	<bean id="signInAdapter" class="com.sap.netweaver.cloud.demo.social.SimpleSignInAdapter" />
+	<bean id="signInAdapter" class="com.sap.netweaver.cloud.samples.springsocialdemo.SimpleSignInAdapter" />
 	
 </beans>

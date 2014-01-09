@@ -11,11 +11,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sap.netweaver.cloud.sample</groupId>
+	<groupId>com.sap.hana.cloud.samples</groupId>
 	<artifactId>socialspringdemo</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	<name>Social Spring Demo</name>
+	<name>SAP HANA Cloud Platform - Samples - Social Spring Demo</name>
 	<description>A simple demo app showcasing how-to use spring-social with twitter</description>
 
 	<organization>
@@ -25,9 +25,8 @@
 
 	<developers>
 		<developer>
-			<name>SAP NetWeaver Cloud</name>
-			<email>netweaver-cloud@sap.com</email>
-			<url>http://netweaver.ondemand.com</url>
+			<name>SAP HANA Cloud Platform</name>
+			<url>http://hana.ondemand.com</url>
 			<organization>SAP AG</organization>
 			<organizationUrl>http://www.sap.com/</organizationUrl>
 		</developer>
@@ -240,5 +239,5 @@
 		</plugins>
 	</build>
 	
-	<url>https://github.com/sapnwcloud/socialspringdemo</url>
+	<url>https://github.com/SAP/cloud-socialspringdemo</url>
 </project>
